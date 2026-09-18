@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Containers Lab</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; padding: 40px; }
+    .box { border: 1px solid #ccc; border-radius: 8px; padding: 16px; max-width: 460px; margin: 20px auto; }
+    code { background: #eee; padding: 2px 6px; border-radius: 4px; }
+    button { font-size: 16px; padding: 8px 16px; cursor: pointer; }
+    #out { margin-top: 16px; white-space: pre-wrap; text-align: left; }
+  </style>
+</head>
+<body>
+
+  <h1>Containers Lab</h1>
+
+  <div class="box">
+    <p>This page is served by container <code>__CONTAINER__</code></p>
+    <p><small>That is the container's ID. Refresh after scaling and watch it change.</small></p>
+  </div>
+
+  <div class="box">
+    <p>Click to make this container talk to the <strong>api</strong> container:</p>
+    <button onclick="callApi()">Call the api</button>
+    <div id="out"></div>
+  </div>
+
+  <script>
+    async function callApi() {
+      const out = document.getElementById('out');
+      out.textContent = 'Calling http://api:4000/info ...';
+      try {
+        const res = await fetch('/api');
+        out.textContent = JSON.stringify(await res.json(), null, 2);
+      } catch (err) {
+        out.textContent = 'Failed: ' + err.message;
+      }
+    }
+  </script>
+
+</body>
+</html>

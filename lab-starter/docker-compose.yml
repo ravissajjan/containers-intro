@@ -1,0 +1,21 @@
+# Two containers, one command.
+# Note: "api" has NO ports section - it is reachable only from inside
+# the private network Compose creates, not from the internet.
+
+services:
+  web:
+    build: ./web
+    ports:
+      - "3000:3000"
+    environment:
+      API_URL: http://api:4000/info
+    depends_on:
+      - api
+
+  api:
+    build: ./api
+    volumes:
+      - api-data:/data      # the visit count survives when the container is deleted
+
+volumes:
+  api-data:

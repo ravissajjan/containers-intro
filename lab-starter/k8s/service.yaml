@@ -1,0 +1,15 @@
+# A Service is a stable address in front of pods that keep coming and going.
+# It finds pods by LABEL (app: web), not by name or IP.
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: web
+spec:
+  type: NodePort
+  selector:
+    app: web
+  ports:
+    - port: 80
+      targetPort: 3000
+      nodePort: 30080

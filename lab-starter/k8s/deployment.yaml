@@ -1,0 +1,22 @@
+# A Deployment keeps N copies of your container running, forever.
+# Replace YOURNAME with your Docker Hub username before applying this.
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+        - name: web
+          image: YOURNAME/containers-lab-web:v1
+          ports:
+            - containerPort: 3000

@@ -1,0 +1,24 @@
+{
+  "name": "containers-lab",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {
+      "version": "latest",
+      "helm": "latest",
+      "minikube": "latest"
+    }
+  },
+  // minikube is installed but NOT started here: starting it costs every student
+  // ~2 minutes of Codespace boot time in Session A, where it is not used. Lab 6.1 starts it.
+  "forwardPorts": [3000, 8080],
+  "portsAttributes": {
+    "3000": { "label": "web" },
+    "8080": { "label": "kubernetes service" }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": ["ms-kubernetes-tools.vscode-kubernetes-tools"]
+    }
+  }
+}
